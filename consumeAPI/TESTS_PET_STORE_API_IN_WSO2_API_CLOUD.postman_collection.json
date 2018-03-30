@@ -1,0 +1,422 @@
+{
+	"id": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a",
+	"name": "TESTS_PET_STORE_API_IN_WSO2_API_CLOUD",
+	"description": "",
+	"order": [
+		"c531f114-5af4-6d15-6dba-bbd1c4655985",
+		"8ebf9843-b166-82e4-5de3-62afce833966",
+		"4896eaa6-3921-c088-0605-76bede4de9e2",
+		"343aa00d-cfc2-145a-2b3d-16a835db07b4",
+		"f5248a93-8422-83dd-a0e4-fc66e3d324f9",
+		"ea2074cc-1a45-e8df-cd0a-a3e4421907b4",
+		"fd42b0c6-0fcb-c6f5-8841-c6bc237f86b6",
+		"4fa19928-6afa-3d55-844e-440f9487e83d",
+		"2bb1e2e2-a847-8414-7c68-a824ffcc6123",
+		"0bb0247a-366e-1eb3-999d-587e008c5fc3"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1522228626814,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "0bb0247a-366e-1eb3-999d-587e008c5fc3",
+			"headers": "Accept: application/json\nAuthorization: Bearer {{api_access_token}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{api_access_token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://gateway.api.cloud.wso2.com:443/t/{{tenantDomain}}/petstore/1.0.0/store/inventory",
+			"folder": "f1e442ce-28e6-242e-6eaa-81a98807f692",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "console.log(responseBody);\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1522406392155,
+			"name": "Returns pet inventories by status",
+			"description": "Returns a map of status codes to quantities",
+			"collectionId": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a",
+			"responses": []
+		},
+		{
+			"id": "2bb1e2e2-a847-8414-7c68-a824ffcc6123",
+			"headers": "Content-Type: application/x-www-form-urlencoded\nAuthorization: Basic {{authKey}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Basic {{authKey}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{gatewayURL}}/token",
+			"queryParams": [],
+			"preRequestScript": "var authKey = btoa(postman.getEnvironmentVariable(\"api_consumer_key\") + ':' + postman.getEnvironmentVariable(\"api_consumer_secret\"));\npostman.setEnvironmentVariable(\"authKey\", authKey);\n",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "grant_type",
+					"value": "client_credentials",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "var jsonData = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"api_access_token\", jsonData.access_token);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1521701958622,
+			"name": "Generate Access Token",
+			"description": "",
+			"collectionId": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a",
+			"responses": [],
+			"collection_id": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a"
+		},
+		{
+			"id": "343aa00d-cfc2-145a-2b3d-16a835db07b4",
+			"headers": "Authorization: Bearer {{access_token_with_scope_subscribe}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer {{access_token_with_scope_subscribe}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{gatewayURL}}/api/am/store/applications",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "var jsonData = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"applicationId\", jsonData.applicationId);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1521701908474,
+			"name": "Create OAuth App",
+			"description": "",
+			"collectionId": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a",
+			"responses": [],
+			"collection_id": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a",
+			"rawModeData": "{\n    \"throttlingTier\": \"Unlimited\",\n    \"description\": \"testingapp\",\n    \"name\": \"testingApp\",\n    \"callbackUrl\": \"http://localhost/callback\"\n}"
+		},
+		{
+			"id": "4896eaa6-3921-c088-0605-76bede4de9e2",
+			"headers": "Authorization: Bearer {{access_token_with_scope_subscribe}}\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer {{access_token_with_scope_subscribe}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{gatewayURL}}/api/am/store/applications?query=testingApp",
+			"queryParams": [
+				{
+					"key": "query",
+					"value": "testingApp",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": "var jsonData = JSON.parse(responseBody);\nif(jsonData.count === 1){\n    postman.setEnvironmentVariable(\"applicationId\", jsonData.list[0].applicationId);\n      postman.setNextRequest(\"Get API\");\n}",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1521701910979,
+			"name": "Get OAuth App",
+			"description": "",
+			"collectionId": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a",
+			"responses": [],
+			"collection_id": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a"
+		},
+		{
+			"id": "4fa19928-6afa-3d55-844e-440f9487e83d",
+			"headers": "Authorization: Bearer {{access_token_with_scope_subscribe}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer {{access_token_with_scope_subscribe}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{gatewayURL}}/api/am/store/applications/generate-keys?applicationId={{applicationId}}",
+			"queryParams": [
+				{
+					"key": "applicationId",
+					"value": "{{applicationId}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "var jsonData = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"api_consumer_key\", jsonData.consumerKey);\npostman.setEnvironmentVariable(\"api_consumer_secret\", jsonData.consumerSecret);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1521701943937,
+			"name": "Generate Application Keys",
+			"description": "",
+			"collectionId": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a",
+			"responses": [],
+			"collection_id": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a",
+			"rawModeData": "{\n  \"validityTime\": \"3600\",\n  \"keyType\": \"PRODUCTION\",\n  \"accessAllowDomains\": [\"ALL\"]\n}"
+		},
+		{
+			"id": "8ebf9843-b166-82e4-5de3-62afce833966",
+			"headers": "Authorization: Basic {{authKey}}\nContent-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Basic {{authKey}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{gatewayURL}}/token",
+			"queryParams": [],
+			"preRequestScript": "var authKey = btoa(postman.getEnvironmentVariable(\"clientId\") + ':' + postman.getEnvironmentVariable(\"clientSecret\"));\npostman.setEnvironmentVariable(\"authKey\", authKey);",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "scope",
+					"value": "apim:subscribe",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "grant_type",
+					"value": "password",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": "{{username}}",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "{{password}}",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"access_token_with_scope_subscribe\", jsonData.access_token);\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1522229168740,
+			"name": "Get Access Token with apim:subscribe scope",
+			"description": "",
+			"collectionId": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a",
+			"responses": []
+		},
+		{
+			"id": "c531f114-5af4-6d15-6dba-bbd1c4655985",
+			"headers": "Content-Type: application/json\nAuthorization: Basic {{base64Key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Basic {{base64Key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{gatewayURL}}/client-registration/register",
+			"queryParams": [],
+			"preRequestScript": "var base64Key = btoa(postman.getGlobalVariable(\"username\") + ':' + postman.getGlobalVariable(\"password\"));\npostman.setEnvironmentVariable(\"base64Key\", base64Key);\n",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"clientId\", jsonData.clientId);\npostman.setEnvironmentVariable(\"clientSecret\", jsonData.clientSecret);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1522405570574,
+			"name": "Dynamic Client Registration",
+			"description": "",
+			"collectionId": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a",
+			"responses": [],
+			"rawModeData": "{\n    \"callbackUrl\": \"www.google.lk\",\n    \"clientName\": \"rest_api_store\",\n    \"tokenScope\": \"Production\",\n    \"owner\": \"{{username}}\",\n    \"grantType\": \"password refresh_token\",\n    \"saasApp\": true\n}"
+		},
+		{
+			"id": "ea2074cc-1a45-e8df-cd0a-a3e4421907b4",
+			"headers": "Authorization: Bearer {{access_token_with_scope_subscribe}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer {{access_token_with_scope_subscribe}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{gatewayURL}}/api/am/store/subscriptions",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1521701928061,
+			"name": "Subscribe to API",
+			"description": "",
+			"collectionId": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a",
+			"responses": [],
+			"collection_id": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a",
+			"rawModeData": "{\n    \"tier\": \"Unlimited\",\n    \"apiIdentifier\": \"{{apiId}}\",\n    \"applicationId\": \"{{applicationId}}\"\n}"
+		},
+		{
+			"id": "f5248a93-8422-83dd-a0e4-fc66e3d324f9",
+			"headers": "Authorization: Bearer {{access_token_with_scope_subscribe}}\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer {{access_token_with_scope_subscribe}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{gatewayURL}}/api/am/store/apis?query=name:{{apiName}}",
+			"queryParams": [
+				{
+					"key": "query",
+					"value": "name:{{apiName}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": "var jsonData = JSON.parse(responseBody);\nif(jsonData.count === 1){\n postman.setEnvironmentVariable(\"apiId\", jsonData.list[0].id);   \n}\n\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1521701920275,
+			"name": "Get API",
+			"description": "",
+			"collectionId": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a",
+			"responses": [],
+			"collection_id": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a"
+		},
+		{
+			"id": "fd42b0c6-0fcb-c6f5-8841-c6bc237f86b6",
+			"headers": "Authorization: Bearer {{access_token_with_scope_subscribe}}\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer {{access_token_with_scope_subscribe}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{gatewayURL}}/api/am/store/applications/{{applicationId}}",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": "var jsonData = JSON.parse(responseBody);\n\nif(jsonData.keys.length === 0){\n  postman.setNextRequest(\"Generate Application Keys\");\n}else{\n    postman.setEnvironmentVariable(\"api_consumer_key\", jsonData.keys[0].consumerKey);\n    postman.setEnvironmentVariable(\"api_consumer_secret\", jsonData.keys[0].consumerSecret);\n    postman.setNextRequest(\"Generate Access Token\");\n}\n\n\n\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1521701936794,
+			"name": "Get Application Details",
+			"description": "",
+			"collectionId": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a",
+			"responses": [],
+			"collection_id": "d3d73ad3-4aac-9d5c-c40c-d870cb7e674a"
+		}
+	]
+}
